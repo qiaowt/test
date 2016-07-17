@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+	<style>
+		*{
+			margin:0px;
+			padding:0px;
+			list-style:none;
+		}
+		#box{
+			width:480px;
+			height:240px;
+			border:1px solid #000;
+			margin:100px auto;
+		}
+		#box li{
+			height:100px;
+			width:100px;
+			float:left;
+			margin:10px;
+			position:relative;
+			cursor:pointer;
+			overflow:hidden;
+		}
+		#box li img{
+			width:100%;
+			height:100%;
+		}
+		#box li span{
+			width:100px;
+			height:100px;
+			background:#000;
+			position:absolute;
+			left:-100px;
+			top:0px;
+			line-height:100px;
+			text-align:center;
+			color:#fff;
+			font-size:30px;
+			opacity:0.5;
+		}
+	</style>
+ </head>
+	<script src="move.js"></script>
+	<script>
+		function hoverDir(obj,ev){
+			var x=obj.offsetLeft+obj.offsetWidth/2-ev.clientX;
+			var y=obj.offsetTop+obj.offsetHeight/2-ev.clientY;
+			return Math.round((Math.atan2(y,x)*180/Math.PI+180)/90)%4;
+		}
+		window.onload = function(){
+			var oBox = document.getElementById('box');
+			var aLi = oBox.getElementsByTagName('li');
+			var oSpan = oBox.getElementsByTagName('span');
+			for(var i=0; i<aLi.length; i++){
+				aLi[i].onmouseenter = function(ev){
+					var oEvent = ev || event;
+					var n=hoverDir(this,oEvent);
+					console.log(n)
+					var oSpan=this.children[1];
+					switch(n){
+						case 0:
+							oSpan.style.top=0;
+							oSpan.style.left='100px';
+							break;
+						case 1:
+							oSpan.style.top='100px';
+							oSpan.style.left=0;
+							break;
+						case 2:
+							oSpan.style.top=0;
+							oSpan.style.left='-100px';
+							break;
+						case 3:
+							oSpan.style.top='-100px';
+							oSpan.style.left=0;
+							break;
+					}
+					move(oSpan,{left : 0, top : 0});
+				}
+				aLi[i].onmouseleave = function(ev){
+					var oEvent = ev || event;
+					var n=hoverDir(this,oEvent);
+					var oSpan=this.children[1];
+					switch(n){
+						case 0:
+							move(oSpan,{left : 100, top : 0});
+							break;
+						case 1:
+							move(oSpan,{left : 0, top : 100});
+							break;
+						case 2:
+							move(oSpan,{left : -100, top : 0});
+							break;
+						case 3:
+							move(oSpan,{left : 0, top : -100});
+							break;
+					}
+				}
+			}
+		}
+	</script>
+ <body>
+	<div id="box">
+		<ul>
+			<li><img src="img/1.jpg"/><span>第一张</span></li>
+			<li><img src="img/2.jpg"/><span>第二张</span></li>
+			<li><img src="img/3.jpg"/><span>第三张</span></li>
+			<li><img src="img/4.jpg"/><span>第四张</span></li>
+			<li><img src="img/5.jpg"/><span>第五张</span></li>
+			<li><img src="img/6.jpg"/><span>第六张</span></li>
+			<li><img src="img/7.jpg"/><span>第七张</span></li>
+			<li><img src="img/8.jpg"/><span>第八张</span></li>
+		</ul>
+	</div>
+ </body>
+</html>

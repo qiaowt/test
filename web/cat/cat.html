@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+	<style>
+		*{
+			margin:0px;
+			padding:0px;
+			list-style:none;
+		}
+		body{
+			background:black;
+		}
+		#ul1{
+			width:366px;
+			margin:80px auto;
+			border:1px solid #abcdef;
+			height:366px;
+		}
+		#ul1 li{
+			width:100px;
+			height:100px;
+			border:1px solid #abcdef;
+			float:left;
+			margin:10px;
+		}
+		#ul1 li img{
+			width:100%;
+			height:100%;
+		}
+	</style>
+ </head>
+	<script src="move.js"></script>
+	<script>
+		window.onload = function(){
+			var oUl = document.getElementById('ul1');
+			var aLi = oUl.children;
+			var aPos = [];
+			var z_index = 1;
+			for(var i = 0 ; i < aLi.length ; i++){
+				aPos[i] = {
+					left : aLi[i].offsetLeft,
+					top : aLi[i].offsetTop
+				}
+			}
+			for(var i = 0 ; i < aLi.length; i++){
+				aLi[i].style.position = 'absolute';
+				aLi[i].style.left = aPos[i].left+'px';
+				aLi[i].style.top = aPos[i].top+'px';
+				aLi[i].style.margin = 0;
+			}
+			for(var i = 0 ; i < aLi.length; i++){
+				aLi[i].onmouseover = function(){
+					this.style.zIndex = z_index++;
+					move(this,{width : 200, height : 200, marginTop : -50, marginLeft : -50});
+				}
+				aLi[i].onmouseout = function(){
+					move(this,{width : 100, height : 100, marginTop : 0, marginLeft : 0});
+				}
+			}
+		}
+	</script>
+ <body>
+	<ul id="ul1">
+		<li><img src="1.jpg"/></li>
+		<li><img src="2.jpg"/></li>
+		<li><img src="3.jpg"/></li>
+		<li><img src="4.jpg"/></li>
+		<li><img src="5.jpg"/></li>
+		<li><img src="6.jpg"/></li>
+		<li><img src="7.jpg"/></li>
+		<li><img src="8.jpg"/></li>
+		<li><img src="9.jpg"/></li>
+	</ul>
+ </body>
+</html>

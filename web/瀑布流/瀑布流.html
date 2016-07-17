@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+	<style>
+		*{
+			margin:0px;
+			padding:0px;
+		}
+		ul{
+			list-style:none;
+			border:1px solid #000;
+			margin:40px;
+			float:left;
+			width:248px;
+		}
+	</style>
+ </head>
+	<script>
+		function rnd(n , m){
+			return parseInt(Math.random()*(m-n))+n;
+		}
+		function createLi(){
+			var aLi = document.createElement('li');
+			aLi.style.height = rnd(100,400)+'px';
+			aLi.style.background = 'rgb('+rnd(0,256)+','+rnd(0,256)+','+rnd(0,256)+')';
+			return aLi;
+		}
+		window.onload = function(){
+			var aUl = document.getElementsByTagName('ul');
+			function create30(){
+				for(var i = 0 ; i < 30 ; i++){
+					var aLi = createLi();
+					var arr =[];
+					for(var j = 0; j < aUl.length ; j++){
+						arr.push(aUl[j]);
+					}
+					arr.sort(function(n1 , n2){
+						return n1.offsetHeight - n2.offsetHeight;
+					});
+					arr[0].appendChild(aLi);
+				}
+			}
+			create30();	
+			window.onresize = window.onscroll = function(){
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				var clientH = document.documentElement.clientHeight;
+				var scrollBottom = scrollTop+clientH;
+				var socrllH = document.documentElement.scrollHeight;
+				if(scrollBottom >= socrllH - 400){
+					create30();					
+				}
+			}
+		}
+	</script>
+ <body>
+	<ul></ul>
+	<ul></ul>
+	<ul></ul>
+	<ul></ul>
+ </body>
+</html>

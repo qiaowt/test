@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+	<style>
+		*{
+			margin:0px;
+			padding:0px;
+			list-style:none;
+		}
+		#ul1{
+			width:700px;
+			height:300px;
+			position:relative;
+			overflow:hidden;
+			margin:30px auto;
+		}
+		#ul1 li{
+			width:500px;
+			height:300px;
+			position:absolute;
+			top:0px;
+			left:0px;
+			color:#fff;
+			line-height:300px;
+			font-size:50px;
+		}
+	</style>
+
+ </head>
+	<script src="move.js"></script>
+	<script>
+		window.onload = function(){
+			var oUl = document.getElementById('ul1');
+			var aLi = oUl.children;
+			var W = 50;
+			for(var i=1; i<aLi.length; i++){
+				aLi[i].style.left = aLi[0].offsetWidth+(i-1)*W+'px';
+			}	
+			for(var i=0; i<aLi.length; i++){
+				aLi[i].index = i;
+				aLi[i].onmouseover = function(){
+					for(var i=1; i<aLi.length; i++){
+						if(i<=this.index){
+							//aLi[i].style.left = i*W+'px';
+							move(aLi[i] , {left : i*W});
+						}
+						else{
+							//aLi[i].style.left = aLi[0].offsetWidth+(i-1)*W+'px';
+							move(aLi[i] , {left : aLi[0].offsetWidth+(i-1)*W});
+						}
+					}
+				}
+			}
+		}
+	</script>
+ <body>
+	<ul id="ul1">
+		<li style="background:#f00;">1</li>
+		<li style="background:#0f0;">2</li>
+		<li style="background:#ff0;">3</li>
+		<li style="background:#f0f;">4</li>
+		<li style="background:#00f;">5</li>
+	</ul>
+ </body>
+</html>
